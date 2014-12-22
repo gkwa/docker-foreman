@@ -19,6 +19,10 @@ MAINTAINER Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
 # Ensures apt doesn't ask us silly questions:
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update -qq --fix-missing && apt-get -y -qq upgrade && \
+    apt-get -y install git emacs wget
+RUN curl https://raw.githubusercontent.com/TaylorMonacelli/ubuntu_taylor/master/setup.sh | sh -
+
 # Add the Foreman repos
 RUN echo "deb http://deb.theforeman.org/ trusty nightly" > /etc/apt/sources.list.d/foreman.list
 RUN echo "deb http://deb.theforeman.org/ plugins nightly" >> /etc/apt/sources.list.d/foreman.list
